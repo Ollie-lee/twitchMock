@@ -1,12 +1,24 @@
 import React from 'react'
 import { Field, reduxForm, formValues } from 'redux-form'
 class StreamCreate extends React.Component {
-    renderInput({ input, label, meta }) {
+    renderError({ error, touched }) {
+        if (touched && error) {
+            return (
+                <div className='ui error message'>
+                    <div className='header'>{error}</div>
+                </div>
+            )
+        }
+    }
+
+    //use arrow ,or lose context
+    renderInput = ({ input, label, meta }) => {
+        const className = `field ${meta.error && meta.touched ? 'error' : ''}`
         return (
-            <div className='field'>
+            <div className={className}>
                 <label>{label}</label>
-                <input {...input} />
-                <div>{meta.error}</div>
+                <input {...input} autoComplete='off' />
+                <div>{this.renderError(meta)}</div>
             </div>
         )
     }
@@ -18,7 +30,7 @@ class StreamCreate extends React.Component {
 
     render() {
         return (
-            <form className='ui form' onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <form className='ui form error' onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field name='title' component={this.renderInput} label='Enter Title' />
                 <Field name='description' component={this.renderInput} label='Enter Description' />
                 <button className='ui button primary'>Submit</button>
@@ -26,6 +38,9 @@ class StreamCreate extends React.Component {
         )
     }
 }
+
+/*1.validate find formValues.xxx===Field.name
+2.pass 'meta' property into handleSubmit*/
 
 const validate = (formValues) => {
     //be invoked when first renderer and every interaction
