@@ -1,21 +1,22 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, formValues } from 'redux-form'
 class StreamCreate extends React.Component {
-    renderInput({ input, label }) {
+    renderInput({ input, label, meta }) {
         return (
             <div className='field'>
                 <label>{label}</label>
                 <input {...input} />
+                <div>{meta.error}</div>
             </div>
         )
     }
 
     onSubmit(formValues) {
-        console.log(formValues)
+        console.log("onSubmit -> formValues", formValues)
+
     }
 
     render() {
-        console.log(this.props)
         return (
             <form className='ui form' onSubmit={this.props.handleSubmit(this.onSubmit)}>
                 <Field name='title' component={this.renderInput} label='Enter Title' />
@@ -26,6 +27,20 @@ class StreamCreate extends React.Component {
     }
 }
 
+const validate = (formValues) => {
+    //be invoked when first renderer and every interaction
+    const errors = {};
+
+    if (!formValues.title) {
+        errors.title = 'please enter a title'
+    }
+
+    if (!formValues.description) {
+        errors.description = 'please enter a description'
+    }
+    return errors
+}
 export default reduxForm({
-    form: 'streamCreate'
+    form: 'streamCreate',
+    validate,
 })(StreamCreate);
