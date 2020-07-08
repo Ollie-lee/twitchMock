@@ -1,4 +1,4 @@
-import streams from '../../apis/streams'
+import streams from '../apis/streams'
 
 export const SIGN_IN = 'SIGN_IN'
 export const signIn = (userId) => {
