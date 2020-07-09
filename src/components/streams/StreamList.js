@@ -13,6 +13,7 @@ export class StreamList extends Component {
         return this.props.streams.map(stream => {
             return (
                 <div className='item' key={stream.id}>
+                    {this.renderAdmin(stream)}
                     <i className='large middle aligned icon camera' />
                     <div className='content'>
                         {stream.title}
@@ -21,6 +22,17 @@ export class StreamList extends Component {
                 </div>
             )
         })
+    }
+
+    renderAdmin(stream) {
+        if (this.props.currentUserId === stream.userId) {
+            return (
+                <div className='right floated content'>
+                    <button className='ui button green'>Edit</button>
+                    <button className='ui button negative'>Delete</button>
+                </div>
+            )
+        }
     }
 
     render() {
@@ -38,6 +50,7 @@ const mapStateToProps = (state) => {
         //All the different values inside of that object 
         //are going to be pulled out and then inserted into an array
         streams: Object.values(state.streams),
+        currentUserId: state.auth.userId//current User's id
     }
 }
 
