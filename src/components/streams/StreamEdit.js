@@ -4,6 +4,7 @@ import StreamForm from './StreamForm'
 import React from 'react'
 import { connect } from 'react-redux'
 import { formValues } from 'redux-form'
+import _ from 'lodash'
 
 class StreamEdit extends React.Component {
     componentDidMount() {
@@ -11,7 +12,7 @@ class StreamEdit extends React.Component {
     }
 
     onSubmit = (formValues) => {
-        console.log(formValues)
+        this.props.editStream(this.props.match.params.id, formValues)
     }
 
     render() {
@@ -23,7 +24,8 @@ class StreamEdit extends React.Component {
                 {/* initial value should be inserted into Form */}
                 <StreamForm
                     // title method should be equal to the 'name' property in <Field />
-                    initialValues={this.props.stream}
+                    //same as {title:xxxx}
+                    initialValues={_.pick(this.props.stream, 'title', 'description')}
                     onSubmit={this.onSubmit}
                 />
             </div>
@@ -35,6 +37,7 @@ class StreamEdit extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        //id is the current id of addressbar, plus the streams structure's key is the id
         stream: state.streams[ownProps.match.params.id]
     }
 }
