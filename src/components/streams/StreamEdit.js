@@ -8,6 +8,7 @@ import _ from 'lodash'
 
 class StreamEdit extends React.Component {
     componentDidMount() {
+        //if we refresh the page. we will lose <StreamList /> data
         this.props.fetchStream(this.props.match.params.id)
     }
 
@@ -17,7 +18,9 @@ class StreamEdit extends React.Component {
 
     render() {
         //first time this.props.stream is undefined
-        //after componentDidMount(), the stream data will show
+        //! which will cause error
+        //after componentDidMount(), the stream data will show 
+        //* -> conditional rendering
         return (
             <div>
                 <h3>StreamEdit</h3>
@@ -37,6 +40,7 @@ class StreamEdit extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        //<Router /> pass a bunch of props to StreamEdit(direct child component)
         //id is the current id of addressbar, plus the streams structure's key is the id
         stream: state.streams[ownProps.match.params.id]
     }

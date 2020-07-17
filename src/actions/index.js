@@ -37,7 +37,7 @@ export const createStream = formValues => async (dispatch, getState) => {
 export const FETCH_STREAMS = 'FETCH_STREAMS';
 export const fetchStreams = () => async dispatch => {
     const response = await streams.get('/streams')
-
+    console.log("response.data", response.data)
     dispatch({
         type: 'FETCH_STREAMS',
         payload: response.data
@@ -51,6 +51,7 @@ export const fetchStream = (id) => async dispatch => {
     dispatch({
         type: 'FETCH_STREAM',
         payload: response.data
+        
     })
 }
 

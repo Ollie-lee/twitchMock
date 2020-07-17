@@ -14,6 +14,7 @@ class StreamForm extends React.Component {
 
     //use arrow ,or lose context
     renderInput = ({ input, label, meta }) => {
+        //the initial parameter above is ( formProps ), come from <Field />
         const className = `field ${meta.error && meta.touched ? 'error' : ''}`
         return (
             <div className={className}>
@@ -25,6 +26,7 @@ class StreamForm extends React.Component {
     }
 
     //formValues(name can be any thing) comes from this.props.handleSubmit
+    //this.props.handleSubmit comes from this.props, gifted by redux-form
     //! Instead a stream form should attempt to call a callback passed down 
     //! from props from some parent component
     onSubmit = (formValues) => {

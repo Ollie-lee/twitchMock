@@ -31,6 +31,7 @@ export default (state = {}, action) => {
                 [action.payload.id]: action.payload
             }
 
+            // with response returned by API, we can change the store structure easily
         case FETCH_STREAMS:
             return {
                 ...state,
