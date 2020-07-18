@@ -15,9 +15,12 @@ const Modal = props => {
                 {/* content */}
                 <div className='header'>{props.title}</div>
                 <div className='content'>
+                    {/* ! props.content passed here is a function which has been invoked*/}
+                    {/* this function returns some jsx */}
                     {props.content}
                 </div>
                 <div className='actions'>
+                    {/* use Fragment here, or semantic UI will error */}
                     {props.actions}
                 </div>
             </div>

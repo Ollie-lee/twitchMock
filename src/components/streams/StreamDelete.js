@@ -28,8 +28,8 @@ class StreamDelete extends React.Component {
         const id = this.props.match.params.id
         return (
             <React.Fragment>
-                {/* not use this.props.deleteStream(id), because we can not pass id
-                which would be instantly called */}
+                {/* not use this.props.deleteStream(id), because we can not pass id,
+                if used method above, this callback would be instantly called */}
                 <button onClick={() => this.props.deleteStream(id)} className='ui red button'>Delete</button>
                 <Link to='/' className='ui button primary'>Cancel</Link>
             </React.Fragment>
