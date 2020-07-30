@@ -1,5 +1,7 @@
 This is a **Single Page Application(SPA)** which allows users to share their screens to specific website.
 
+✨**Live Link**: https://twitch-mock.vercel.app/
+
 To implement screen streaming functionality, we need to **host RTMP server locally**.
 
 Different kind of users have different privileges.
